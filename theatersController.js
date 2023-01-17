@@ -1,4 +1,4 @@
-const theaters = [
+let theaters = [
   {
     id: 1,
     name: 'theater1',
@@ -19,25 +19,51 @@ const theaters = [
   }
 ]
 
-const getAllTheatersHandler = (req, res, next) => {
-  res.json([])
+const getManyTheatersHandler = (req, res, next) => {
+  if (req.query.cities) {
+    return res.json({
+      code: 400,
+      message: `Something went wrong while processing your request. 
+      Invalid filter cities.`,
+      data: {}
+    })
+  }
+  return res.json(theaters)
 }
+
 const getTheaterHandler = (req, res, next) => {
   const { id } = req.params
-  res.json(theaters.find(theater => theater.id === id))
+  // const {
+  //   page,
+  //   perPage,
+  //   totalPages
+  // } = new
+  const theater = theaters
+    .find(theater => theater.id === id)
+  res.json(theater)
 }
+
 const createTheaterHandler = (req, res, next) => {
-  res.json({ id: 1 })
+  const { theater } = req.body
+  theaters.push(theater)
+  res.json({ id: theaters.length + 1 })
 }
+
 const updateTheaterHandler = (req, res, next) => {
+  const { newTheater } = req.body
+  theaters = theaters.filter(theater => theater.id === newTheater.id)
+  theaters.push(newTheater)
   res.json({ message: 'ok' })
 }
+
 const deleteTheaterHandler = (req, res, next) => {
+  const { id } = req.params
+  theaters = theaters.filter(theater => theater.id !== id)
   res.json({ message: 'ok' })
 }
 
 module.exports = {
-  getAllTheatersHandler,
+  getManyTheatersHandler,
   getTheaterHandler,
   createTheaterHandler,
   updateTheaterHandler,

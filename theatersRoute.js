@@ -2,14 +2,14 @@ const { roomsRoute } = require('./roomsRoute')
 const theatersRoute = require('express').Router()
 
 const {
-  getAllTheatersHandler,
+  getManyTheatersHandler,
   getTheaterHandler,
   createTheaterHandler,
   updateTheaterHandler,
   deleteTheaterHandler
 } = require('./theatersController.js')
 
-theatersRoute.get('/', getAllTheatersHandler)
+theatersRoute.get('/', getManyTheatersHandler)
 theatersRoute.get('/:id', getTheaterHandler)
 theatersRoute.post('/', createTheaterHandler)
 theatersRoute.put('/:id', updateTheaterHandler)
