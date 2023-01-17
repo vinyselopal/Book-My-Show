@@ -40,25 +40,72 @@ const getTheaterHandler = (req, res, next) => {
   // } = new
   const theater = theaters
     .find(theater => theater.id === id)
+
+  if (!theater) {
+    res.json({
+      code: 404,
+      message: 'The requested resource wasnt found',
+      data: {}
+    })
+  }
   res.json(theater)
 }
 
 const createTheaterHandler = (req, res, next) => {
   const { theater } = req.body
   theaters.push(theater)
+  if (!theater) {
+    res.json({
+      code: 400,
+      message: 'Failed to create record',
+      data: {
+        error: 'Missing required value'
+      }
+    })
+  }
   res.json({ id: theaters.length + 1 })
 }
 
 const updateTheaterHandler = (req, res, next) => {
   const { newTheater } = req.body
-  theaters = theaters.filter(theater => theater.id === newTheater.id)
+  const { id } = req.params
+  if (!newTheater) {
+    res.json({
+      code: 400,
+      message: 'Missing required value',
+      data: {}
+    })
+  }
+  if (!id) {
+    res.json({
+      code: 404,
+      message: 'The requested resource wasnt found',
+      data: {}
+    })
+  }
+  theaters = theaters.filter(theater => theater.id === id)
   theaters.push(newTheater)
   res.json({ message: 'ok' })
 }
 
 const deleteTheaterHandler = (req, res, next) => {
   const { id } = req.params
+  if (!id) {
+    res.json({
+      code: 404,
+      message: 'The requested resource wasnt found',
+      data: {}
+    })
+  }
   theaters = theaters.filter(theater => theater.id !== id)
+  if (!theaters) { // check response
+    res.json({
+      code: 400,
+      message: 'Missing required value',
+      data: {}
+    })
+  }
+
   res.json({ message: 'ok' })
 }
 
