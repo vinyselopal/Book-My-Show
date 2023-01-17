@@ -6,25 +6,53 @@
 - multiple movies
 - Seats have serial int id
 
-## Entities:
+## Entities and attributes:
 
 - Movies
-    - id
-    - name
-    - length
+    - id (P-KEY)
+    - name (VARCHAR)
+    - length (hours)
 
 - Shows
-    - show_id
+    - id
     - movie_id (references movies -> id)
-    - slot
-    - price
+    - start_time (time)
+    - price (decimal)
 
 - Seats
-    - seat_id 
+    - id 
     - show_id (references shows -> id)
-    - booked
     - booked_by (references users -> id)
 
 - Users
-    - user_id
-    - user_name
+    - id
+    - username (VARCHAR)
+
+- Rooms
+    - id (P-KEY)
+    - name (VARCHAR)
+    - theater_id (references theater -> id)
+
+
+- Theaters
+    - id (P-KEY)
+    - name (VARCHAR)
+
+- Bookings
+    - id (P-KEY)
+    - seat_id
+    - show_id
+    - booked_by
+    - booking_details
+
+- Booking Details (in bookings table)
+    - seat_number
+    - sold_to
+    - ticket_price
+    - taxes
+    - total_price
+    - discount
+    - movie_name
+    - time_slot
+    - theater
+    - room_name
