@@ -14,8 +14,8 @@ const authMiddleware = (req, res, next) => {
     req.username = username
     next()
   } catch {
-    return res.status(403).json({
-      code: 403,
+    return res.status(401).json({
+      code: 401,
       message: 'unauthorized',
       data: {}
     })
