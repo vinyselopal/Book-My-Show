@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 
 const authMiddleware = (req, res, next) => {
-  console.log(req.headers)
   const token = req.headers['authorization'].split(' ')[1].trim()
 
   if (!token) {
@@ -13,7 +12,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const { username } = jwt.verify(req.body.token, 'secret')
+    const { username } = jwt.verify(token, 'secret')
     req.username = username
     next()
   } catch {
