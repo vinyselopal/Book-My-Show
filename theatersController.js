@@ -21,7 +21,7 @@ let theaters = [
 
 const getManyTheatersHandler = (req, res, next) => {
   if (req.query.cities) {
-    return res.json({
+    return res.status(400).json({
       code: 400,
       message: `Something went wrong while processing your request. 
       Invalid filter cities.`,
@@ -42,7 +42,7 @@ const getTheaterHandler = (req, res, next) => {
     .find(theater => theater.id === id)
 
   if (!theater) {
-    return res.json({
+    return res.status(404).json({
       code: 404,
       message: 'The requested resource wasnt found',
       data: {}
@@ -55,7 +55,7 @@ const createTheaterHandler = (req, res, next) => {
   const { theater } = req.body
   theaters.push(theater)
   if (!theater) {
-    return res.json({
+    return res.status(400).json({
       code: 400,
       message: 'Failed to create record',
       data: {
@@ -70,14 +70,14 @@ const updateTheaterHandler = (req, res, next) => {
   const { newTheater } = req.body
   const { id } = req.params
   if (!newTheater) {
-    return res.json({
+    return res.status(400).json({
       code: 400,
       message: 'Missing required value',
       data: {}
     })
   }
   if (!id) {
-    return res.json({
+    return res.status(404).json({
       code: 404,
       message: 'The requested resource wasnt found',
       data: {}
@@ -91,7 +91,7 @@ const updateTheaterHandler = (req, res, next) => {
 const deleteTheaterHandler = (req, res, next) => {
   const { id } = req.params
   if (!id) {
-    return res.json({
+    return res.status(404).json({
       code: 404,
       message: 'The requested resource wasnt found',
       data: {}
@@ -99,7 +99,7 @@ const deleteTheaterHandler = (req, res, next) => {
   }
   theaters = theaters.filter(theater => theater.id !== id)
   if (!theaters) { // check response
-    return res.json({
+    return res.status(400).json({
       code: 400,
       message: 'Missing required value',
       data: {}
