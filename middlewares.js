@@ -1,11 +1,22 @@
+const jwtToken = ''
+
 const authMiddleware = (req, res, next) => {
   if (!req.body.token) {
+    return res.status(401).json({
+      code: 401,
+      message: 'unauthenticated',
+      data: {}
+    })
+  }
+
+  if (req.body.token !== jwtToken) {
     return res.status(403).json({
       code: 403,
       message: 'unauthorized',
       data: {}
     })
   }
+
   req.token = req.body.token
   next()
 }

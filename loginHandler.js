@@ -18,8 +18,8 @@ const loginHandler = (req, res, next) => {
 
   const userNameExists = users.find(user => user.username === username)
   if (!userNameExists) {
-    return res.status(403).json({
-      code: 403,
+    return res.status(400).json({
+      code: 400,
       message: 'username does not exist',
       data: {}
     })
@@ -28,8 +28,8 @@ const loginHandler = (req, res, next) => {
   const checkPassword = (userNameExists.password === password)
 
   if (!checkPassword) {
-    return res.status(403).json({
-      code: 403,
+    return res.status(400).json({
+      code: 400,
       message: 'username does not exist',
       data: {}
     })
