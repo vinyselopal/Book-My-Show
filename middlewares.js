@@ -16,7 +16,7 @@ const authMiddleware = (req, res, next) => {
   } catch {
     return res.status(401).json({
       code: 401,
-      message: 'unauthorized',
+      message: 'invalid jwt token',
       data: {}
     })
   }
