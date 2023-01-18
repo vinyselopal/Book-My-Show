@@ -1,6 +1,6 @@
 const loginRoute = require('express').Router()
 const { loginHandler } = require('../controllers/loginController')
 
-loginRoute.get('/', loginHandler)
+loginRoute.post('/', loginHandler)
 
 module.exports = {loginRoute}
