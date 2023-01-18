@@ -1,6 +1,11 @@
 const app = require('express')()
 const PORT = 8000
+
 const { theatersRoute } = require('./theatersRoute')
+const { loginRoute } = require('./loginRoute')
+const { authMiddleware } = require('./utils.js')
+
 app.listen(() => console.log(`server is running on port: ${PORT}`), PORT)
 
-app.use('/theaters', theatersRoute)
+app.use('/theaters', authMiddleware, theatersRoute)
+app.use('/login', loginRoute)
