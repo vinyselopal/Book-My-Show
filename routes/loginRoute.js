@@ -1,5 +1,5 @@
 const loginRoute = require('express').Router()
-const { loginHandler } = require('./loginController')
+const { loginHandler } = require('../controllers/loginController')
 
 loginRoute.get('/', loginHandler)
 

@@ -7,7 +7,7 @@ const {
   createTheaterHandler,
   updateTheaterHandler,
   deleteTheaterHandler
-} = require('./theatersController.js')
+} = require('../controllers/theatersController.js')
 
 theatersRoute.get('/', getManyTheatersHandler)
 theatersRoute.get('/:id', getTheaterHandler)
