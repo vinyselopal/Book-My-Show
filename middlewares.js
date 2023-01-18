@@ -1,4 +1,4 @@
-const jwtToken = ''
+const jwt = require('jsonwebtoken')
 
 const authMiddleware = (req, res, next) => {
   if (!req.body.token) {
@@ -9,16 +9,17 @@ const authMiddleware = (req, res, next) => {
     })
   }
 
-  if (req.body.token !== jwtToken) {
+  try {
+    const { username } = jwt.verify(req.body.token, 'secret')
+    req.username = username
+    next()
+  } catch {
     return res.status(403).json({
       code: 403,
       message: 'unauthorized',
       data: {}
     })
   }
-
-  req.token = req.body.token
-  next()
 }
 
 module.exports = { authMiddleware }

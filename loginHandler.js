@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const users = [
   {
     username: 'a',
@@ -35,7 +37,9 @@ const loginHandler = (req, res, next) => {
     })
   }
 
-  const token = ''
+  const payload = { username }
+  const token = jwt.sign(payload, 'secret')
+
   return res.json({
     message: 'Login successful',
     token
