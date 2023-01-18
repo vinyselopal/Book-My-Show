@@ -33,14 +33,11 @@ const getManyTheatersHandler = (req, res, next) => {
 
 const getTheaterHandler = (req, res, next) => {
   const { id } = req.params
-  // const {
-  //   page,
-  //   perPage,
-  //   totalPages
-  // } = new
+
   const theater = theaters
     .find(theater => theater.id === id)
 
+  console.log(theater, id)
   if (!theater) {
     return res.status(404).json({
       code: 404,

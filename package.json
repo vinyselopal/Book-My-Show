@@ -1,5 +1,25 @@
 {
   "dependencies": {
-    "jsonwebtoken": "^9.0.0"
-  }
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "name": "bookmyshow",
+  "description": "- one theater - one room - multiple slots - multiple movies - Seats have serial int id",
+  "version": "1.0.0",
+  "main": "loginHandler.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinyselopal/bookMyShow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinyselopal/bookMyShow/issues"
+  },
+  "homepage": "https://github.com/vinyselopal/bookMyShow#readme"
 }

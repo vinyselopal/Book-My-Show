@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const authMiddleware = (req, res, next) => {
-  if (!req.body.token) {
+  if (!req.body?.token) {
     return res.status(401).json({
       code: 401,
       message: 'unauthenticated',
